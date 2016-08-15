@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class DynArrayTest {
 	private DynArray array;
-	private final int steps = 100000;
 
 	@Before
 	public void setUp() throws Exception {
@@ -90,9 +89,9 @@ public class DynArrayTest {
 	
 	private Histogram measureAddPerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
 		Histogram gains = new Histogram(0, 10, 100);
-		for (int i = 0; i < 50; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 100000);
-			long listTime = measurePerformance((int index) -> arrayList.add(index), 100000);
+		for (int i = 0; i < 70; i++) {
+			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 300000);
+			long listTime = measurePerformance((int index) -> arrayList.add(index), 300000);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}
@@ -101,9 +100,9 @@ public class DynArrayTest {
 	
 	private Histogram measureRemovePerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
 		Histogram gains = new Histogram(0.5f, 1.5f, 100);
-		for (int i = 0; i < 50; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 10);
-			long listTime = measurePerformance((int index) -> dynArray.remove(0), 10);
+		for (int i = 0; i < 70; i++) {
+			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 20);
+			long listTime = measurePerformance((int index) -> dynArray.remove(0), 20);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}
@@ -114,7 +113,7 @@ public class DynArrayTest {
 		DynArray dynArray = new DynArray();
 		List<Integer> arrayList = new ArrayList<Integer>();
 
-		for (int i = 0; i != steps; i++) {
+		for (int i = 0; i != 10000; i++) {
 			dynArray.add(i);
 			arrayList.add(i);
 		}
