@@ -11,17 +11,16 @@ public class UglyCalculatorTest {
 		float expectedValue = calculator.isqrtStdlib(radix);
 		float actualValue = calculator.isqrt(radix);
 		if (Math.abs(expectedValue - actualValue) > expectedValue * maxRelativeError) {
-			System.err.println("isqrt(2) weicht zu stark vom erwarteten Wert ("+expectedValue+") ab: " + actualValue);
+			System.err.println("isqrt("+radix+") weicht zu stark vom erwarteten Wert ("+expectedValue+") ab: " + actualValue);
 		}
 
 		radix = 10000;
 		expectedValue = calculator.isqrtStdlib(radix);
 		actualValue = calculator.isqrt(radix);
 		if (Math.abs(expectedValue - actualValue) > expectedValue * maxRelativeError) {
-			System.err.println("isqrt(10000) weicht zu stark vom erwarteten Wert ("+expectedValue+") ab: " + actualValue);
+			System.err.println("isqrt("+radix+") weicht zu stark vom erwarteten Wert ("+expectedValue+") ab: " + actualValue);
 		}
 		
-
 		radix = (float)1E27;
 		expectedValue = calculator.isqrtStdlib(radix);
 		actualValue = calculator.isqrt(radix);
@@ -41,6 +40,6 @@ public class UglyCalculatorTest {
 		} catch (ArithmeticException e) {
 		}
 		
-		System.err.println("Fertig");
+		System.err.println("Done");
 	}
 }

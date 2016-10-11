@@ -20,6 +20,16 @@ public class DynArrayTest {
 	public void testToString() {
 		assertEquals(array.toString(), "[1, 2, 3, 4]");
 	}
+	
+	public void testSet() {
+		array.set(1, 123);
+		assertEquals(array.toString(), "[1, 123, 3, 4]");
+	}
+	
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void testInvalidSet() {
+		array.set(4, 123);
+	}
 
 	@Test
 	public void testDefaultConstructor() {
@@ -89,9 +99,9 @@ public class DynArrayTest {
 	
 	private Histogram measureAddPerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
 		Histogram gains = new Histogram(0, 10, 100);
-		for (int i = 0; i < 70; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 300000);
-			long listTime = measurePerformance((int index) -> arrayList.add(index), 300000);
+		for (int i = 0; i < 30; i++) {
+			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 30000);
+			long listTime = measurePerformance((int index) -> arrayList.add(index), 30000);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}
@@ -100,9 +110,9 @@ public class DynArrayTest {
 	
 	private Histogram measureRemovePerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
 		Histogram gains = new Histogram(0.5f, 1.5f, 100);
-		for (int i = 0; i < 70; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 20);
-			long listTime = measurePerformance((int index) -> dynArray.remove(0), 20);
+		for (int i = 0; i < 30; i++) {
+			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 100);
+			long listTime = measurePerformance((int index) -> dynArray.remove(0), 100);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}

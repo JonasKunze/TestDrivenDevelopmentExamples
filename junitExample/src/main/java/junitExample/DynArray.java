@@ -7,7 +7,7 @@ public class DynArray implements IDynArray {
 	public DynArray() {
 		this(1);
 	}
-	
+
 	public DynArray(int initialCapacity) {
 		data = new int[initialCapacity];
 	}
@@ -17,27 +17,30 @@ public class DynArray implements IDynArray {
 		data = initData.clone();
 		firstFreeElement = initData.length;
 	}
+	
+	@Override
+	public void set(int index, int value) throws ArrayIndexOutOfBoundsException {
+		if (index >= firstFreeElement) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		data[index] = value;
+	}
 
+	@Override
 	public int get(int index) throws ArrayIndexOutOfBoundsException {
-		if (index >= firstFreeElement || index < 0) {
+		if (index >= firstFreeElement) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 		return data[index];
 	}
 
-	public void set(int index, int value) throws ArrayIndexOutOfBoundsException {
-		data[index] = value;
-	}
-
+	@Override
 	public void add(int value) {
-		checkSize(firstFreeElement + 1);
+		checkCapacity(firstFreeElement + 1);
 		data[firstFreeElement++] = value;
 	}
 
-	public int popBack() {
-		return data[--firstFreeElement];
-	}
-
+	@Override
 	public boolean remove(int index) throws ArrayIndexOutOfBoundsException {
 		if (index >= firstFreeElement) {
 			return false;
@@ -50,12 +53,13 @@ public class DynArray implements IDynArray {
 		return true;
 	}
 
+	@Override
 	public void resize(int newSize) {
-		checkSize(newSize);
+		checkCapacity(newSize);
 		firstFreeElement = newSize;
 	}
 
-	private void checkSize(int requiredSize) {
+	private void checkCapacity(int requiredSize) {
 		if (data.length < requiredSize) {
 			expand(requiredSize);
 		}
@@ -67,8 +71,10 @@ public class DynArray implements IDynArray {
 		data = tmp;
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder("[");
+
 		for (int i = 0; i != firstFreeElement; i++) {
 			strBuilder.append(get(i));
 			if (i != firstFreeElement - 1) {
@@ -80,10 +86,12 @@ public class DynArray implements IDynArray {
 		return strBuilder.toString();
 	}
 
+	@Override
 	public int size() {
 		return firstFreeElement;
 	}
 
+	@Override
 	public void clear() {
 		firstFreeElement = 0;
 	}

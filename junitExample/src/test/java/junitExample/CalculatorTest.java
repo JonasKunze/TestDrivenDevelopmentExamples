@@ -37,6 +37,7 @@ public class CalculatorTest {
 
 	private void testIsqrtWithPositiveRadix(float radix) {
 		float expectedValue = calculator.isqrtStdlib(radix);
-		assertEquals(expectedValue, calculator.isqrt(radix), expectedValue * maxRelativeError);
+		float actualValue = calculator.isqrt(radix);
+		assertEquals(expectedValue, actualValue, expectedValue * maxRelativeError);
 	}
 }
