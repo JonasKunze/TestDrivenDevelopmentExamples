@@ -13,7 +13,6 @@ public class DynArray implements IDynArray {
 	}
 
 	public DynArray(int[] initData) {
-		data = new int[initData.length];
 		data = initData.clone();
 		firstFreeElement = initData.length;
 	}
