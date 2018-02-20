@@ -100,8 +100,8 @@ public class DynArrayTest {
 	private Histogram measureAddPerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
 		Histogram gains = new Histogram(0, 10, 100);
 		for (int i = 0; i < 100; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 30000);
-			long listTime = measurePerformance((int index) -> arrayList.add(index), 30000);
+			long dynArrayTime = measurePerformance((int index) -> dynArray.add(index), 100000);
+			long listTime = measurePerformance((int index) -> arrayList.add(index), 100000);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}
@@ -109,10 +109,10 @@ public class DynArrayTest {
 	}
 	
 	private Histogram measureRemovePerformanceRatio(DynArray dynArray, List<Integer> arrayList) {
-		Histogram gains = new Histogram(0.5f, 1.5f, 100);
-		for (int i = 0; i < 30; i++) {
-			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 100);
-			long listTime = measurePerformance((int index) -> arrayList.remove(0), 100);
+		Histogram gains = new Histogram(0f, 10f, 100);
+		for (int i = 0; i < 50; i++) {
+			long dynArrayTime = measurePerformance((int index) -> dynArray.remove(0), 5);
+			long listTime = measurePerformance((int index) -> arrayList.remove(0), 5);
 			float gain = listTime / (float) dynArrayTime;
 			gains.insert(gain); 
 		}
