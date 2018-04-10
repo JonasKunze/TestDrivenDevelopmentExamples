@@ -1,12 +1,12 @@
 package junitExample;
 
 public class Calculator {
-
-	float add(final float a, final float b) {
+	
+	public float add(final float a, final float b) {
 		return a + b;
 	}
 
-	float subtract(final float a, final float b) {
+	public float subtract(final float a, final float b) {
 		return a - b;
 	}
 
@@ -22,15 +22,15 @@ public class Calculator {
 	 *            multiplicator
 	 * @return returns the product of a and b
 	 */
-	float multiply(final float a, final float b) {
+	public float multiply(final float a, final float b) {
 		return a * b;
 	}
 
-	float divide(final float a, final float b) {
+	public float divide(final float a, final float b) {
 		return a / b;
 	}
 
-	float isqrtStdlib(final float radix) {
+	public float isqrtStdlib(final float radix) {
 		return 1 / ((float) Math.sqrt(radix));
 	}
 
@@ -39,7 +39,8 @@ public class Calculator {
 	 * are based on the example from 
 	 * https://en.wikipedia.org/wiki/Fast_inverse_square_root
 	 */
-	float isqrt(final float radix) {
+	public float isqrt(final float radix) {
+		
 		if (radix < 0)
 			throw new ArithmeticException("sqrt of negative number");
 		if (radix == 0) {
@@ -58,7 +59,7 @@ public class Calculator {
 		y = y * (threehalfs - (x2 * y * y)); // 1st iteration
 		// y = y * ( threehalfs - ( x2 * y * y ) ); // 2nd iteration, this can
 		// be removed
-
+		
 		return y;
 	}
 
