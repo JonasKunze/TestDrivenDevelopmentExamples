@@ -40,11 +40,10 @@ public class Calculator {
 	 * https://en.wikipedia.org/wiki/Fast_inverse_square_root
 	 */
 	public float isqrt(final float radix) {
-		
 		if (radix < 0)
 			throw new ArithmeticException("sqrt of negative number");
 		if (radix == 0) {
-			return 0 / 0.F;
+			return 1 / 0.F;
 		}
 
 		int i;

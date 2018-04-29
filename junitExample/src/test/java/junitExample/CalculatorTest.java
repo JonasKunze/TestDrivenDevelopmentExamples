@@ -20,9 +20,9 @@ public class CalculatorTest {
 	public void testISqrtWithZeroRadix() {
 		float radix = 0;
 		float isqrt = calculator.isqrt(radix);
-		assertTrue(Float.isNaN(isqrt));
+		assertTrue(isqrt == 1 / 0f);
 	}
-	
+
 	@Test(expected = ArithmeticException.class)
 	public void testISqrtWithNegativeRadix() {
 		calculator.isqrt(-1);
